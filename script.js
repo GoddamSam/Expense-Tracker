@@ -127,6 +127,6 @@ const balance = document.getElementById(
     updateValues();
   }
   
-  Init();
+  
   
   form.addEventListener('submit',addTransaction);
