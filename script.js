@@ -30,6 +30,15 @@ const balance = document.getElementById(
   //Add Transaction
   function addTransaction(e){
     e.preventDefault();
+
+    const currentBalance = parseFloat(balance.innerText.replace('₹', ''));
+
+  // Check if the new transaction will make the balance negative
+  if (currentBalance + parseFloat(amount.value) < 0) {
+    alert('Transaction cannot be added. It will result in a negative balance.');
+    return;
+  }
+
     if(text.value.trim() === '' || amount.value.trim() === ''){
       alert('please add text and amount')
     }else{
@@ -38,7 +47,9 @@ const balance = document.getElementById(
         text:text.value,
         amount:+amount.value
       }
-  
+
+      console.log(netBal(transactions));
+      
       transactions.push(transaction);
   
       addTransactionDOM(transaction);
@@ -46,6 +57,7 @@ const balance = document.getElementById(
       updateLocalStorage();
       text.value='';
       amount.value='';
+      
     }
   }
   
@@ -104,7 +116,14 @@ const balance = document.getElementById(
   }
   
   
-  //6 
+  //
+  function netBal(transactions){
+    let res=0;
+      Array.from(transactions).forEach((tr)=>{
+        res+=transactions.amount;
+      });
+      return res;
+  }
   
   //Remove Transaction by ID
   function removeTransaction(id){
@@ -127,6 +146,7 @@ const balance = document.getElementById(
     updateValues();
   }
   
-  Init()
+    Init();
+  
   
   form.addEventListener('submit',addTransaction);
