@@ -31,13 +31,13 @@ const balance = document.getElementById(
   function addTransaction(e){
     e.preventDefault();
 
-  //   const currentBalance = parseFloat(balance.innerText.replace('₹', ''));
+    const currentBalance = parseFloat(balance.innerText.replace('₹', ''));
 
-  // // Check if the new transaction will make the balance negative
-  // if (currentBalance + parseFloat(amount.value) < 0) {
-  //   alert('Transaction cannot be added. It will result in a negative balance.');
-  //   return;
-  // }
+  // Check if the new transaction will make the balance negative
+  if (currentBalance + parseFloat(amount.value) < 0) {
+    alert('Transaction cannot be added. It will result in a negative balance.');
+    return;
+  }
 
     if(text.value.trim() === '' || amount.value.trim() === ''){
       alert('please add text and amount')
