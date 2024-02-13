@@ -85,7 +85,7 @@ const balance = document.getElementById(
       ${transaction.text} <span>${sign}${Math.abs(
       transaction.amount
     )}</span>
-      <button class="delete-btn" onclick="removeTransaction(${transaction.id})">x</button>
+      <button class="delete-btn" onclick="removeTransaction(${transaction.id},${transaction.amount})">x</button>
       `;
     list.appendChild(item);
   }
@@ -126,7 +126,14 @@ const balance = document.getElementById(
   }
   
   //Remove Transaction by ID
-  function removeTransaction(id){
+  function removeTransaction(id,amt){
+    const balanceamt=parseFloat(balance.innerText.substring(1));
+    console.log(balanceamt);
+    if(balanceamt-amt<0)
+    {
+      alert('Transaction cannot be added. It will result in a negative balance.');
+      return;
+    }
     transactions = transactions.filter(transaction => transaction.id !== id);
     updateLocalStorage();
     Init();
